@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'screens/scan_screen.dart';
-import 'screens/rewards_screen.dart';
-import 'screens/profile_screen.dart';
+import 'screens/screens.dart';
+import 'constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const HabitusApp());
@@ -18,6 +19,7 @@ class HabitusApp extends StatelessWidget {
       title: 'Habitus',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: AppColours.bodyBackgroundColour,
       ),
       home: const MainScreen(),
     );
@@ -32,7 +34,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   final List<Widget> _screens = [
     const HomeScreen(),
@@ -52,27 +54,41 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: AppColours.navBarColour,
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: SvgPicture.asset(
+              AppImages.homeNavigationIcon,
+              height: 25, 
+              width: 25),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
+            icon: SvgPicture.asset(
+              AppImages.qrCodeNavigationIcon,
+              height: 25, 
+              width: 25),
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
+            icon: SvgPicture.asset(
+              AppImages.giftNavigationIcon,
+              height: 27, 
+              width: 27),
             label: 'Rewards',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: SvgPicture.asset(
+              AppImages.profileNavigationIcon,
+              height: 25, 
+              width: 25),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: AppColours.selectedIconColour,
+        unselectedItemColor: AppColours.unselectedIconColour,
         onTap: _onItemTapped,
       ),
     );

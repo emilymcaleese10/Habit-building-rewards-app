@@ -34,6 +34,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   path_provider: ^2.0.11
   provider: ^6.1.2
+  flutter_svg: ^2.0.10+1
 
 
 
@@ -55,11 +56,11 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/Primary Logo Simplified.png
-    - assets/images/roundedProfileIcon.png
-    - assets/images/giftIcon.png
-    - assets/images/homeIcon.png
-    - assets/images/qrCodeIcon.png
+    - assets/images/Primary Logo Simplified.svg
+    - assets/images/roundedProfileIcon.svg
+    - assets/images/giftIcon.svg
+    - assets/images/homeIcon.svg
+    - assets/images/qrCodeIcon.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -96,3 +97,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+ 
+  fonts: 
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-VariableFont_wght.ttf
