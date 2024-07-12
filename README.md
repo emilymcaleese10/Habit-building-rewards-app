@@ -1,16 +1,10 @@
-# habitus
+## Habitus
 
-A new Flutter project.
+### Description
 
-## Getting Started
+This is a flutter mobile application for an enterprise I am working on to promote reward-reinforced habit-building for exercise. The dart files in the lib folder are the main files that are used to create the contents of the app. For more information about the goal of this project, copy and paste the URL below into a browser.
 
-This project is a starting point for a Flutter application.
+### Website
 
-A few resources to get you started if this is your first Flutter project:
+ha-bitus.github.io
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
