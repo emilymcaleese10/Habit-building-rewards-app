@@ -1,4 +1,4 @@
-export 'home_screen.dart';
-export 'scan_screen.dart';
-export 'rewards_screen.dart';
-export 'profile_screen.dart';
+export 'home/home_screen.dart';
+export 'scan/scan_screen.dart';
+export 'reward/rewards_screen.dart';
+export 'profile/profile_screen.dart';

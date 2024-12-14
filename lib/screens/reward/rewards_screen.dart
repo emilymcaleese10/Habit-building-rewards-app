@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habitus/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/widgets/widgets.dart';
+import 'package:habitus/general_widgets/widgets.dart';
 
 class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
@@ -74,16 +74,25 @@ class _ProgressState extends State<GoalProgress> {
                     top: 51,
                     bottom: 6,
                     child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text("$scansLeft",
-                            style: AppTextStyles.paragraphTextStyle))),
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        "$scansLeft",
+                        style: AppTextStyles.paragraphTextStyle
+                      ),
+                    ),
+                ),
                 Positioned(
                     top: 12,
                     left: 25,
                     right: 25,
                     child: SizedBox(
-                        child: SvgPicture.asset(AppImages.qrCodeNavigationIcon,
-                            height: 35, width: 35)))
+                      child: SvgPicture.asset(
+                        AppImages.qrCodeNavigationIcon,
+                        height: 35, 
+                        width: 35
+                      )
+                    )
+                )
               ],
             )),
         const Spacer(),
@@ -95,9 +104,12 @@ class _ProgressState extends State<GoalProgress> {
             child: Stack(
               children: [
                 const SizedBox(
-                    width: 307, height: 88, child: BackgroundBoxWidget()),
+                  width: 307,
+                  height: 88, 
+                  child: BackgroundBoxWidget(),
+                ),
                 Center(
-                    child: SizedBox(
+                  child: SizedBox(
                   width: 266,
                   height: 31,
                   child: LinearProgressIndicator(

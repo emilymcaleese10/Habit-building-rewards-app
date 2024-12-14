@@ -29,8 +29,8 @@ class AppImages {
   static const String homeNavigationIcon = 'assets/images/homeIcon.svg';
   static const String qrCodeNavigationIcon = 'assets/images/qrCodeIcon.svg';
   static const String giftNavigationIcon = 'assets/images/giftIcon.svg';
-  static const String profileNavigationIcon =
-      'assets/images/roundedProfileIcon.svg';
+  static const String profileNavigationIcon = 'assets/images/roundedProfileIcon.svg';
+  static const String streakIcon = 'assets/images/streakIcon.svg';
 }
 
 class AppDimensions {

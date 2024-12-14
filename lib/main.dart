@@ -34,13 +34,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   final List<Widget> _screens = [
     const HomeScreen(),
     const ScanScreen(),
     const RewardsScreen(),
-    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -77,13 +76,6 @@ class _MainScreenState extends State<MainScreen> {
               height: 27, 
               width: 27),
             label: 'Rewards',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppImages.profileNavigationIcon,
-              height: 25, 
-              width: 25),
-            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
