@@ -22,6 +22,15 @@ class HomeDisplay extends StatefulWidget {
 
 class _HomeState extends State<HomeDisplay> {
   int streak = 0;
+  Map<String, bool> scannedOnEachDayMap = {
+    'Monday': true,
+    'Tuesday': false,
+    'Wednesday': true,
+    'Thursday': false,
+    'Friday': true,
+    'Saturday': true,
+    'Sunday': false,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class _HomeState extends State<HomeDisplay> {
             width: 300,
             child: Center(
               child: Text(
-                "Scans left until next reward:",
+                "Streak:",
                 style: AppTextStyles.paragraphTextStyle,
               ),
             ),
@@ -77,12 +86,12 @@ class _HomeState extends State<HomeDisplay> {
             ),
           ),
           const Spacer(),
-          const SizedBox(
+          SizedBox(
             width: 307,
             height: 88,
             child: Stack(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 307,
                   height: 88, 
                   child: BackgroundBoxWidget(),
@@ -90,7 +99,7 @@ class _HomeState extends State<HomeDisplay> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ProgressCirclesRow(),
+                    ProgressCirclesRow(scansForEachDayMap: scannedOnEachDayMap),
                   ],
                 ),
               ],
