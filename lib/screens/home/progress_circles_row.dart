@@ -33,18 +33,27 @@ class _ProgressCirclesRowState extends State<ProgressCirclesRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(
-        AppValues.noOfdaysInWeek, // 7 days in week
-        (index) => Container(
-          width: 27,
-          height: 27,
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            color: getColourFromDayIndex(index),
-            shape: BoxShape.circle,
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+            AppValues.noOfdaysInWeek, // 7 days in week - print 7 circles
+            (index) {
+            return Expanded(
+              flex: 1,
+              child: Center(
+                child: Container(
+                  width: 25,
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: getColourFromDayIndex(index), // if (scanned) circle = green; else circle = grey
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              )
+            );
+          }
         ),
       ),
     );
