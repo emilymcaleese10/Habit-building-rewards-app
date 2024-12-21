@@ -25,8 +25,8 @@ class HomeDisplay extends StatefulWidget {
 class _HomeState extends State<HomeDisplay> {
   int totalScans = globalState.totalScans;
   Map<String, bool> scannedOnEachDayMap = {
-    'Monday': false,
-    'Tuesday': true,
+    'Monday': true,
+    'Tuesday': false,
     'Wednesday': true,
     'Thursday': true,
     'Friday': true,

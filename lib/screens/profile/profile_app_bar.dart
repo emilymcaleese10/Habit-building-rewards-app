@@ -3,8 +3,8 @@ import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitus/screens/profile/profile_screen.dart';
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({super.key});
+class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const ProfileAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -13,12 +13,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: AppColours.appBarColour,
-        title: SvgPicture.asset(AppImages.habitusLogo,
-            height: AppDimensions.habitusLogoHeight),
+        title: SvgPicture.asset(
+          AppImages.habitusLogo,
+          height: AppDimensions.habitusLogoHeight),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {Navigator.pop(context);},
         ),
         actions: [
           Padding(
