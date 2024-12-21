@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {

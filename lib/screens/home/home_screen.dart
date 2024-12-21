@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 import 'package:habitus/screens/home/days_of_week_letters_row.dart';
 import 'package:habitus/screens/home/progress_circles_row.dart';
-import 'package:habitus/general_widgets/widgets.dart';
+import 'package:habitus/global_widgets/widgets.dart';
+import 'package:habitus/global_widgets/global_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,7 +23,7 @@ class HomeDisplay extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeDisplay> {
-  int streak = 0;
+  int totalScans = globalState.totalScans;
   Map<String, bool> scannedOnEachDayMap = {
     'Monday': false,
     'Tuesday': true,
@@ -70,7 +71,7 @@ class _HomeState extends State<HomeDisplay> {
                     bottom: 6,
                     child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("$streak",
+                      child: Text("$totalScans",
                           style: AppTextStyles.paragraphTextStyle),
                     ),
                   )
@@ -88,25 +89,27 @@ class _HomeState extends State<HomeDisplay> {
           ),
           const Spacer(),
           SizedBox(
-            width: 307,
-            height: 85,
-            child: Stack(
-              children: [
-                const SizedBox(
-                  width: 307,
-                  height: 85, 
-                  child: BackgroundBoxWidget(),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const DaysOfWeekLettersRow(daysOfWeekLetters: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],),
-                    ProgressCirclesRow(scansForEachDayMap: scannedOnEachDayMap),
-                  ],
-                ),
-              ],
-            )
-          ),
+              width: 307,
+              height: 85,
+              child: Stack(
+                children: [
+                  const SizedBox(
+                    width: 307,
+                    height: 85,
+                    child: BackgroundBoxWidget(),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const DaysOfWeekLettersRow(
+                        daysOfWeekLetters: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                      ),
+                      ProgressCirclesRow(
+                          scansForEachDayMap: scannedOnEachDayMap),
+                    ],
+                  ),
+                ],
+              )),
           const Spacer(),
         ]),
       ),

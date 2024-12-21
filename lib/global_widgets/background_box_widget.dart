@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 
 class BackgroundBoxWidget extends StatelessWidget {
   const BackgroundBoxWidget({super.key});

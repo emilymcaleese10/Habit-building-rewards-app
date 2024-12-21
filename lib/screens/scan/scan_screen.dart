@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/constants.dart';
-import 'package:habitus/general_widgets/widgets.dart';
+import 'package:habitus/main/constants.dart';
+import 'package:habitus/global_widgets/widgets.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});

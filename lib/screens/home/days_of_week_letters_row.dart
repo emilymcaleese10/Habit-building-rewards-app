@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 
 class DaysOfWeekLettersRow extends StatelessWidget {
   final List<String> daysOfWeekLetters;
@@ -7,7 +7,6 @@ class DaysOfWeekLettersRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // padding: const EdgeInsets.symmetric(horizontal: 18),
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(

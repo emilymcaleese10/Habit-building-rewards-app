@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/general_widgets/widgets.dart';
+import 'package:habitus/global_widgets/widgets.dart';
+import 'package:habitus/global_widgets/global_state.dart';
 
 class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
@@ -20,10 +21,35 @@ class GoalProgress extends StatefulWidget {
 }
 
 class _ProgressState extends State<GoalProgress> {
-  int scansLeft = 3;
-  double get scanProgress => (3 - scansLeft) / 3;
-  bool rewardCollected = false;
-  bool rewardReady = false;
+  late int scansLeft;
+  late int totalScans;
+  late int scansRequiredForGoal;
+  double get scanProgress =>
+      (scansRequiredForGoal - scansLeft) / scansRequiredForGoal;
+  late bool rewardCollected;
+  late bool rewardReady;
+
+  @override
+  void initState() {
+    super.initState();
+    scansLeft = globalState.scansLeft;
+    totalScans = globalState.totalScans;
+    scansRequiredForGoal = 3;
+    rewardCollected = false;
+    rewardReady = false;
+  }
+
+  void updateCounters() {
+    decrementScansLeft();
+    incrementTotalScans();
+  }
+
+  void incrementTotalScans() {
+    setState(() {
+      totalScans++;
+      globalState.totalScans = totalScans;
+    });
+  }
 
   void decrementScansLeft() {
     setState(() {
@@ -31,6 +57,7 @@ class _ProgressState extends State<GoalProgress> {
         scansLeft--;
         rewardCollected = false;
         rewardReady = false;
+        globalState.scansLeft = scansLeft;
       } else {
         rewardReady = true;
       }
@@ -42,6 +69,7 @@ class _ProgressState extends State<GoalProgress> {
       if (!rewardCollected && scansLeft == 0) {
         scansLeft = 3;
         rewardCollected = true;
+        globalState.scansLeft = scansLeft;
       }
     });
   }
@@ -71,28 +99,21 @@ class _ProgressState extends State<GoalProgress> {
                     height: AppDimensions.smallDisplaySquareLength,
                     child: BackgroundBoxWidget()),
                 Positioned.fill(
-                    top: 51,
-                    bottom: 6,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        "$scansLeft",
-                        style: AppTextStyles.paragraphTextStyle
-                      ),
-                    ),
+                  top: 51,
+                  bottom: 6,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text("$scansLeft",
+                        style: AppTextStyles.paragraphTextStyle),
+                  ),
                 ),
                 Positioned(
                     top: 12,
                     left: 25,
                     right: 25,
                     child: SizedBox(
-                      child: SvgPicture.asset(
-                        AppImages.qrCodeNavigationIcon,
-                        height: 35, 
-                        width: 35
-                      )
-                    )
-                )
+                        child: SvgPicture.asset(AppImages.qrCodeNavigationIcon,
+                            height: 35, width: 35)))
               ],
             )),
         const Spacer(),
@@ -105,11 +126,11 @@ class _ProgressState extends State<GoalProgress> {
               children: [
                 const SizedBox(
                   width: 307,
-                  height: 88, 
+                  height: 88,
                   child: BackgroundBoxWidget(),
                 ),
                 Center(
-                  child: SizedBox(
+                    child: SizedBox(
                   width: 266,
                   height: 31,
                   child: LinearProgressIndicator(
@@ -144,8 +165,7 @@ class _ProgressState extends State<GoalProgress> {
             )),
         const Spacer(),
         ElevatedButton(
-            onPressed: decrementScansLeft,
-            child: const Text("Simulate QR Scan")),
+            onPressed: updateCounters, child: const Text("Simulate QR Scan")),
         const Spacer()
       ]),
     )));

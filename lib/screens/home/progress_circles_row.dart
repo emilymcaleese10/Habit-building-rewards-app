@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habitus/constants.dart';
+import 'package:habitus/main/constants.dart';
 
 class ProgressCirclesRow extends StatefulWidget {
   final Map<String, bool> scansForEachDayMap;
