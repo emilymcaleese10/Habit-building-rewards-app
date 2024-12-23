@@ -3,15 +3,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitus/main/constants.dart';
 import 'package:habitus/screens/home/days_of_week_letters_row.dart';
 import 'package:habitus/screens/home/progress_circles_row.dart';
-import 'package:habitus/global_widgets/widgets.dart';
-import 'package:habitus/global_widgets/global_state.dart';
+import 'package:habitus/general_widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(appBar: AppBarWidget(), body: HomeDisplay());
+    return const Scaffold(
+      appBar: AppBarWidget(), 
+      drawer: Drawer(
+        backgroundColor: AppColours.appBarColour,
+        child: Text("hello"),
+        ),
+      body: HomeDisplay());
   }
 }
 
@@ -25,13 +30,13 @@ class HomeDisplay extends StatefulWidget {
 class _HomeState extends State<HomeDisplay> {
   int totalScans = globalState.totalScans;
   Map<String, bool> scannedOnEachDayMap = {
-    'Monday': true,
+    'Monday': false,
     'Tuesday': false,
-    'Wednesday': true,
-    'Thursday': true,
+    'Wednesday': false,
+    'Thursday': false,
     'Friday': true,
-    'Saturday': false,
-    'Sunday': false,
+    'Saturday': true,
+    'Sunday': true,
   };
 
   @override

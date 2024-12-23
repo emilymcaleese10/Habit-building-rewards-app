@@ -18,7 +18,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.menu),
-          onPressed: () {},
+          onPressed: () {Scaffold.of(context).openDrawer();},
         ),
         actions: [
           Padding(

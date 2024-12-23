@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens.dart';
 import 'constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:habitus/screens/camera/camera_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

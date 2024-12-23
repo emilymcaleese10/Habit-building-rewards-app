@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/global_widgets/widgets.dart';
-import 'package:habitus/global_widgets/global_state.dart';
+import 'package:habitus/general_widgets/widgets.dart';
+import 'package:habitus/general_widgets/global_state.dart';
 
 class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(appBar: AppBarWidget(), body: GoalProgress());
+    return const Scaffold(
+      appBar: AppBarWidget(), 
+      drawer: Drawer(
+        backgroundColor: AppColours.appBarColour,
+        child: Text("hello"),
+      ),
+      body: GoalProgress());
   }
 }
 
