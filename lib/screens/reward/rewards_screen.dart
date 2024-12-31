@@ -10,12 +10,12 @@ class RewardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppBarWidget(), 
-      drawer: Drawer(
-        backgroundColor: AppColours.appBarColour,
-        child: Text("hello"),
-      ),
-      body: GoalProgress());
+        appBar: AppBarWidget(),
+        drawer: Drawer(
+          backgroundColor: AppColours.appBarColour,
+          child: Text("hello"),
+        ),
+        body: GoalProgress());
   }
 }
 
@@ -34,12 +34,14 @@ class _ProgressState extends State<GoalProgress> {
       (scansRequiredForGoal - scansLeft) / scansRequiredForGoal;
   late bool rewardCollected;
   late bool rewardReady;
+  late Map<String, bool> scansForEachDayMap;
 
   @override
   void initState() {
     super.initState();
     scansLeft = globalState.scansLeft;
     totalScans = globalState.totalScans;
+    scansForEachDayMap = globalState.scansForEachDayMap;
     scansRequiredForGoal = 3;
     rewardCollected = false;
     rewardReady = false;
@@ -48,6 +50,27 @@ class _ProgressState extends State<GoalProgress> {
   void updateCounters() {
     decrementScansLeft();
     incrementTotalScans();
+    updateProgressCirclesMap();
+  }
+
+  void updateProgressCirclesMap() {
+    List<String> daysList = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
+    DateTime now = DateTime.now();
+    int weekDayMapIndex = (now.weekday) - 1; // Monday=1 -> Monday=0
+    String day = daysList[weekDayMapIndex];
+    setState(
+      () {
+        globalState.scansForEachDayMap[day] = true;
+      },
+    );
   }
 
   void incrementTotalScans() {

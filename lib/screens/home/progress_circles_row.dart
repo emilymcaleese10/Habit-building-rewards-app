@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:habitus/main/constants.dart';
 
@@ -10,25 +12,14 @@ class ProgressCirclesRow extends StatefulWidget {
 }
 
 class _ProgressCirclesRowState extends State<ProgressCirclesRow> {
-  List<Color> scannedColourList = [];
+  late Map<String, bool> scansForEachDayMap;
+  List<bool> scansForEachDayValues = [];
 
   @override
   void initState() {
     super.initState();
-    createProgressCircleListFromMap(widget.scansForEachDayMap);
-  }
-
-  void createProgressCircleListFromMap(Map<String, bool> scannedOnEachDayMap) {
-    List<bool> scannedBooleanList = scannedOnEachDayMap.values.toList();
-    for (int i = 0; i < scannedBooleanList.length; i++) {
-      scannedBooleanList[i]
-          ? scannedColourList.add(AppColours.widgetGreen)
-          : scannedColourList.add(AppColours.backgroundWidgetGrey);
-    }
-  }
-
-  Color getColourFromDayIndex(int dayIndex) {
-    return scannedColourList[dayIndex];
+    scansForEachDayMap = widget.scansForEachDayMap;
+    scansForEachDayValues = scansForEachDayMap.values.toList();
   }
 
   @override
@@ -37,9 +28,8 @@ class _ProgressCirclesRowState extends State<ProgressCirclesRow> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(
-            AppValues.noOfdaysInWeek, // 7 days in week - print 7 circles
-            (index) {
+        children: scansForEachDayMap.entries.map(
+          (entry) {
             return Expanded(
               flex: 1,
               child: Center(
@@ -47,15 +37,14 @@ class _ProgressCirclesRowState extends State<ProgressCirclesRow> {
                   width: 25,
                   height: 25,
                   decoration: BoxDecoration(
-                    color: getColourFromDayIndex(index), // if (scanned) circle = green; else circle = grey
-                    shape: BoxShape.circle,
+                    color: entry.value ? AppColours.widgetGreen : AppColours.backgroundWidgetGrey,
+                    shape: BoxShape.circle, 
                   ),
                 ),
-              )
+              ),
             );
-          }
-        ),
-      ),
+          }).toList(),
+      )
     );
   }
 }

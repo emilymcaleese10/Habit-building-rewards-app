@@ -11,12 +11,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppBarWidget(), 
-      drawer: Drawer(
-        backgroundColor: AppColours.appBarColour,
-        child: Text("hello"),
+        appBar: AppBarWidget(),
+        drawer: Drawer(
+          backgroundColor: AppColours.appBarColour,
+          child: Text("hello"),
         ),
-      body: HomeDisplay());
+        body: HomeDisplay());
   }
 }
 
@@ -29,15 +29,12 @@ class HomeDisplay extends StatefulWidget {
 
 class _HomeState extends State<HomeDisplay> {
   int totalScans = globalState.totalScans;
-  Map<String, bool> scannedOnEachDayMap = {
-    'Monday': false,
-    'Tuesday': false,
-    'Wednesday': false,
-    'Thursday': false,
-    'Friday': true,
-    'Saturday': true,
-    'Sunday': true,
-  };
+  Map<String, bool> scansForEachDayMap = globalState.scansForEachDayMap;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,23 +58,29 @@ class _HomeState extends State<HomeDisplay> {
               child: Stack(
                 children: [
                   const SizedBox(
-                      width: AppDimensions.smallDisplaySquareLength,
-                      height: AppDimensions.smallDisplaySquareLength,
-                      child: BackgroundBoxWidget()),
+                    width: AppDimensions.smallDisplaySquareLength,
+                    height: AppDimensions.smallDisplaySquareLength,
+                    child: BackgroundBoxWidget()),
                   Positioned(
-                      top: 12,
-                      left: 25,
-                      right: 25,
-                      child: SizedBox(
-                          child: SvgPicture.asset(AppImages.streakIcon,
-                              height: 35, width: 35))),
+                    top: 12,
+                    left: 25,
+                    right: 25,
+                    child: SizedBox(
+                      child: SvgPicture.asset(
+                        AppImages.streakIcon,
+                        height: 35, 
+                        width: 35
+                      )
+                    )
+                  ),
                   Positioned.fill(
                     top: 51,
                     bottom: 6,
                     child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("$totalScans",
-                          style: AppTextStyles.paragraphTextStyle),
+                      child: Text(
+                        "$totalScans",
+                        style: AppTextStyles.paragraphTextStyle),
                     ),
                   )
                 ],
@@ -110,7 +113,7 @@ class _HomeState extends State<HomeDisplay> {
                         daysOfWeekLetters: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
                       ),
                       ProgressCirclesRow(
-                          scansForEachDayMap: scannedOnEachDayMap),
+                        scansForEachDayMap: globalState.scansForEachDayMap),
                     ],
                   ),
                 ],
