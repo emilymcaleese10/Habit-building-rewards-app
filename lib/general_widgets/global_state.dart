@@ -7,9 +7,9 @@ class GlobalState {
   int scansLeft = 3;
   int totalScans = 0;
   Map<String, bool> scansForEachDayMap = {
-      'Monday': true,
+      'Monday': false,
       'Tuesday': false,
-      'Wednesday': false,
+      'Wednesday': true,
       'Thursday': false,
       'Friday': false,
       'Saturday': false,

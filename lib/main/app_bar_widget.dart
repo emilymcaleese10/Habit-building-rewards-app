@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/screens/profile/profile_screen.dart';
+import 'package:habitus/screens/profile_screen.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key});

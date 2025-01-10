@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/screens/camera/camera_screen.dart';
-import 'package:habitus/screens/home/home_screen.dart';
-import 'package:habitus/screens/reward/rewards_screen.dart';
+import 'package:habitus/screens/camera_screen.dart';
+import 'package:habitus/screens/home_screen.dart';
+import 'package:habitus/screens/rewards_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [

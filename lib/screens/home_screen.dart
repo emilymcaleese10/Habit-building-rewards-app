@@ -24,10 +24,10 @@ class HomeDisplay extends StatefulWidget {
   const HomeDisplay({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<HomeDisplay> {
+class HomeState extends State<HomeDisplay> {
   int totalScans = globalState.totalScans;
   Map<String, bool> scansForEachDayMap = globalState.scansForEachDayMap;
 

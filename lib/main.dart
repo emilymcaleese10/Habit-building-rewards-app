@@ -3,9 +3,16 @@
 import 'package:flutter/material.dart';
 import 'main/main_screen.dart';
 import 'main/constants.dart';
+import 'package:habitus/general_widgets/scan_state_management.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const HabitusApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ScanNotifier(),
+      child: const HabitusApp(),
+    ),
+  );
 }
 
 class HabitusApp extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habitus/main/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitus/general_widgets/widgets.dart';
-import 'package:habitus/general_widgets/global_state.dart';
+import 'package:provider/provider.dart';
 
 class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
@@ -23,10 +23,11 @@ class GoalProgress extends StatefulWidget {
   const GoalProgress({super.key});
 
   @override
-  _ProgressState createState() => _ProgressState();
+  ProgressState createState() => ProgressState();
 }
 
-class _ProgressState extends State<GoalProgress> {
+class ProgressState extends State<GoalProgress> {
+  late final scanState = Provider.of<ScanNotifier>(context);
   late int scansLeft;
   late int totalScans;
   late int scansRequiredForGoal;
@@ -132,7 +133,7 @@ class _ProgressState extends State<GoalProgress> {
                   bottom: 6,
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Text("$scansLeft",
+                    child: Text("${scanState.scansLeft}",
                         style: AppTextStyles.paragraphTextStyle),
                   ),
                 ),
@@ -193,9 +194,6 @@ class _ProgressState extends State<GoalProgress> {
               ),
             )),
         const Spacer(),
-        ElevatedButton(
-            onPressed: updateCounters, child: const Text("Simulate QR Scan")),
-        const Spacer()
       ]),
     )));
   }
