@@ -3,15 +3,18 @@
 import 'package:flutter/material.dart';
 import 'main/main_screen.dart';
 import 'main/constants.dart';
-import 'package:habitus/general_widgets/scan_state_management.dart';
+import 'package:habitus/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ScanNotifier(),
-      child: const HabitusApp(),
-    ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ScanNotifier()),
+        ChangeNotifierProvider(create: (_) => StreakNotifier()),
+      ], 
+    child: const HabitusApp(),
+    )
   );
 }
 

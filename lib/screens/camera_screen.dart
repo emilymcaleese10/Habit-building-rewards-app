@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habitus/main/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:habitus/general_widgets/widgets.dart';
+import 'package:habitus/providers/streak_state_management.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});
@@ -26,18 +27,21 @@ class ScanProgress extends StatefulWidget {
 }
 
 class ScanState extends State<ScanProgress> {
-  late int scansLeft;
-  late int totalScans;
 
   @override
   Widget build(BuildContext context) {
+  final streakState = context.watch<StreakNotifier>();
+  final scanState = context.watch<ScanNotifier>();
+
     return Column(children: [
       Center(
         child: ElevatedButton(
-            onPressed: () {
-              Provider.of<ScanNotifier>(context, listen: false).decrementScansLeft();
-            },
-            child: const Text("Simulate QR Scan")),
+          onPressed: () {
+            streakState.updateStreak();
+            scanState.updateCounters();
+          },
+          child: const Text("Simulate QR Scan"),
+        ),
       ),
     ]);
   }

@@ -4,6 +4,7 @@ import 'package:habitus/main/constants.dart';
 import 'package:habitus/screens/home/days_of_week_letters_row.dart';
 import 'package:habitus/screens/home/progress_circles_row.dart';
 import 'package:habitus/general_widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,16 +29,11 @@ class HomeDisplay extends StatefulWidget {
 }
 
 class HomeState extends State<HomeDisplay> {
-  int totalScans = globalState.totalScans;
-  Map<String, bool> scansForEachDayMap = globalState.scansForEachDayMap;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final scanState = context.watch<ScanNotifier>();
+    // final streakState = context.watch<StreakNotifier>();
+
     return Scaffold(
       body: Center(
         child: Column(children: <Widget>[
@@ -58,9 +54,9 @@ class HomeState extends State<HomeDisplay> {
               child: Stack(
                 children: [
                   const SizedBox(
-                    width: AppDimensions.smallDisplaySquareLength,
-                    height: AppDimensions.smallDisplaySquareLength,
-                    child: BackgroundBoxWidget()),
+                      width: AppDimensions.smallDisplaySquareLength,
+                      height: AppDimensions.smallDisplaySquareLength,
+                      child: BackgroundBoxWidget()),
                   Positioned(
                     top: 12,
                     left: 25,
@@ -79,7 +75,7 @@ class HomeState extends State<HomeDisplay> {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Text(
-                        "$totalScans",
+                        '${scanState.totalScans}',
                         style: AppTextStyles.paragraphTextStyle),
                     ),
                   )
@@ -113,7 +109,7 @@ class HomeState extends State<HomeDisplay> {
                         daysOfWeekLetters: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
                       ),
                       ProgressCirclesRow(
-                        scansForEachDayMap: globalState.scansForEachDayMap),
+                          scansForEachDayMap: scanState.scansForEachDayMap),
                     ],
                   ),
                 ],

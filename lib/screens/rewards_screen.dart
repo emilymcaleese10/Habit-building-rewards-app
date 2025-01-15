@@ -27,67 +27,37 @@ class GoalProgress extends StatefulWidget {
 }
 
 class ProgressState extends State<GoalProgress> {
-  late final scanState = Provider.of<ScanNotifier>(context);
-  late int scansLeft;
-  late int totalScans;
   late int scansRequiredForGoal;
-  double get scanProgress =>
-      (scansRequiredForGoal - scansLeft) / scansRequiredForGoal;
   late bool rewardCollected;
   late bool rewardReady;
-  late Map<String, bool> scansForEachDayMap;
 
   @override
   void initState() {
     super.initState();
-    scansLeft = globalState.scansLeft;
-    totalScans = globalState.totalScans;
-    scansForEachDayMap = globalState.scansForEachDayMap;
     scansRequiredForGoal = 3;
     rewardCollected = false;
     rewardReady = false;
   }
 
+  double get scanProgress {
+    final scanState = context.watch<ScanNotifier>();
+    return (scansRequiredForGoal - scanState.scansLeft) / scansRequiredForGoal;
+  }
+
   void updateCounters() {
-    decrementScansLeft();
-    incrementTotalScans();
-    updateProgressCirclesMap();
+    final scanState = context.read<ScanNotifier>();
+    scanState.decrementScansLeft();
+    scanState.incrementTotalScans();
+    updateRewardState();
+    scanState.updateProgressCirclesMap();
   }
 
-  void updateProgressCirclesMap() {
-    List<String> daysList = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
-    ];
-    DateTime now = DateTime.now();
-    int weekDayMapIndex = (now.weekday) - 1; // Monday=1 -> Monday=0
-    String day = daysList[weekDayMapIndex];
-    setState(
-      () {
-        globalState.scansForEachDayMap[day] = true;
-      },
-    );
-  }
-
-  void incrementTotalScans() {
+  void updateRewardState() {
+    final scanState = context.read<ScanNotifier>();
     setState(() {
-      totalScans++;
-      globalState.totalScans = totalScans;
-    });
-  }
-
-  void decrementScansLeft() {
-    setState(() {
-      if (scansLeft > 0) {
-        scansLeft--;
+      if (scanState.scansLeft > 0) {
         rewardCollected = false;
         rewardReady = false;
-        globalState.scansLeft = scansLeft;
       } else {
         rewardReady = true;
       }
@@ -95,17 +65,19 @@ class ProgressState extends State<GoalProgress> {
   }
 
   void collectReward() {
+    final scanState = context.read<ScanNotifier>();
     setState(() {
-      if (!rewardCollected && scansLeft == 0) {
-        scansLeft = 3;
+      if (!rewardCollected && scanState.scansLeft == 0) {
+        scanState.resetScansLeft();
         rewardCollected = true;
-        globalState.scansLeft = scansLeft;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final scanState = context.watch<ScanNotifier>();
+
     return Scaffold(
         body: SafeArea(
             child: Center(
@@ -138,12 +110,17 @@ class ProgressState extends State<GoalProgress> {
                   ),
                 ),
                 Positioned(
-                    top: 12,
-                    left: 25,
-                    right: 25,
-                    child: SizedBox(
-                        child: SvgPicture.asset(AppImages.qrCodeNavigationIcon,
-                            height: 35, width: 35)))
+                  top: 12,
+                  left: 25,
+                  right: 25,
+                  child: SizedBox(
+                    child: SvgPicture.asset(
+                      AppImages.qrCodeNavigationIcon,
+                      height: 35, 
+                      width: 35
+                    )
+                  )
+                )
               ],
             )),
         const Spacer(),
@@ -184,7 +161,7 @@ class ProgressState extends State<GoalProgress> {
                   const SizedBox(
                       width: 307, height: 152, child: BackgroundBoxWidget()),
                   Center(
-                    child: (scansLeft == 0 && !rewardCollected)
+                    child: (scanState.scansLeft == 0 && !rewardCollected)
                         ? ElevatedButton(
                             onPressed: collectReward,
                             child: const Text("Collect Reward"))
