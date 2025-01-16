@@ -21,7 +21,7 @@ class RewardListViewState extends State<RewardListView> {
               ? const Center(
                   child: Text(
                     "Your rewards will appear here",
-                    style: TextStyle(fontSize: 16),
+                    style: AppTextStyles.noRewardsMessageTextStyle,
                   ),
                 )
               : ListView.builder(
@@ -35,7 +35,7 @@ class RewardListViewState extends State<RewardListView> {
                           style: AppTextStyles.paragraphTextStyle
                         ),
                         subtitle: Text(
-                          'Date Rewarded: ${reward.dateRewarded.toLocal()}',
+                          reward.dateRewarded, // string
                           style: AppTextStyles.subtitleTextStyle,
                         ),
                         trailing: ElevatedButton(

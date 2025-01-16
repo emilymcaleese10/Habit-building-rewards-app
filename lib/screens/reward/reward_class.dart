@@ -1,5 +1,5 @@
 class Reward {
-  final DateTime dateRewarded;
+  final String dateRewarded;
   bool isRedeemed;
 
   Reward({
