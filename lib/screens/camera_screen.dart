@@ -61,6 +61,10 @@ class ScanState extends State<ScanProgress> {
       const Center(
         child: Text("Scan again in: "),
       ),
+      ElevatedButton(
+            onPressed: counterState.resetScansLeft,
+            child: const Text('Reset Scans Left')),
+        const Spacer(),
     ]);
   }
 }

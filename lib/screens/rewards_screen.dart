@@ -86,29 +86,19 @@ class ProgressState extends State<GoalProgress> {
         ProgressBarWidget(rewardProgress: scanProgress),
         const Spacer(),
         const Text("Your Reward:", style: AppTextStyles.paragraphTextStyle),
-        const Spacer(),
-        SizedBox(
-            width: 307,
-            height: 152,
-            child: Center(
-              child: Stack(
-                children: [
-                  const SizedBox(
-                      width: 307, height: 152, child: BackgroundBoxWidget()),
-                  Center(
-                    child: (counterState.scansLeft == 0 && !rewardCollected)
-                        ? ElevatedButton(
-                            onPressed: collectReward,
-                            child: const Text("Collect Reward"))
-                        : Container(),
-                  )
-                ],
+        const SizedBox(
+          width: 307,
+          height: 152,
+          child: Stack(
+            children: [
+              SizedBox(
+                width: 307, height: 152, 
+                child: BackgroundBoxWidget(),
               ),
-            )),
-        const Spacer(),
-        ElevatedButton(
-            onPressed: counterState.resetScansLeft,
-            child: const Text('Reset Scans Left')),
+              RewardListView(),
+            ]
+          )
+        ),
         const Spacer(),
       ]),
     ));
