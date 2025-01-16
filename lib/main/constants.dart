@@ -14,11 +14,18 @@ class AppColours {
 }
 
 class AppTextStyles {
-  static const double paragraphfontSize = 20;
+  static const double paragraphFontSize = 20;
+  static const double subtitleFontSize = 12;
   static const String defaultFontFamily = 'Nunito';
   static const TextStyle paragraphTextStyle = TextStyle(
     color: AppColours.mainFontColour,
-    fontSize: paragraphfontSize,
+    fontSize: paragraphFontSize,
+    fontFamily: AppTextStyles.defaultFontFamily,
+    fontWeight: FontWeight.w900,
+  );
+  static const TextStyle subtitleTextStyle = TextStyle(
+    color: AppColours.mainFontColour,
+    fontSize: subtitleFontSize,
     fontFamily: AppTextStyles.defaultFontFamily,
     fontWeight: FontWeight.w900,
   );

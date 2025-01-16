@@ -12,6 +12,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CounterNotifier()),
         ChangeNotifierProvider(create: (_) => StreakNotifier(lastScan: DateTime(2025, 1, 1))),
+        ChangeNotifierProvider(create: (_) => RewardNotifier()),
       ], 
     child: const HabitusApp(),
     )

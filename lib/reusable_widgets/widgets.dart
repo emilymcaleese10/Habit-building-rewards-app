@@ -1,7 +1,7 @@
 export 'app_bar_widget.dart';
 export 'background_box_widget.dart';
 export '../main/global_state.dart';
-export 'package:habitus/general_widgets/small_display_square.dart';
+export 'package:habitus/reusable_widgets/small_display_square.dart';
 
 // screen widgets
 export 'package:habitus/screens/reward/progress_bar_widget.dart';
