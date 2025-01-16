@@ -61,7 +61,6 @@ class ProgressState extends State<GoalProgress> {
     final scanState = context.read<CounterNotifier>();
     setState(() {
       if (!rewardCollected && scanState.scansLeft == 0) {
-        scanState.resetScansLeft();
         rewardCollected = true;
       }
     });
@@ -69,7 +68,7 @@ class ProgressState extends State<GoalProgress> {
 
   @override
   Widget build(BuildContext context) {
-    final scanState = context.watch<CounterNotifier>();
+    final counterState = context.watch<CounterNotifier>();
 
     return Scaffold(
         body: Center(
@@ -79,7 +78,7 @@ class ProgressState extends State<GoalProgress> {
             style: AppTextStyles.paragraphTextStyle),
         const Spacer(),
         SmallDisplaySquareWidget(
-            displayNumber: scanState.scansLeft,
+            displayNumber: counterState.scansLeft,
             svgIcon: AppImages.qrCodeNavigationIcon),
         const Spacer(),
         const Text("Reward Progress:", style: AppTextStyles.paragraphTextStyle),
@@ -97,7 +96,7 @@ class ProgressState extends State<GoalProgress> {
                   const SizedBox(
                       width: 307, height: 152, child: BackgroundBoxWidget()),
                   Center(
-                    child: (scanState.scansLeft == 0 && !rewardCollected)
+                    child: (counterState.scansLeft == 0 && !rewardCollected)
                         ? ElevatedButton(
                             onPressed: collectReward,
                             child: const Text("Collect Reward"))
@@ -108,9 +107,8 @@ class ProgressState extends State<GoalProgress> {
             )),
         const Spacer(),
         ElevatedButton(
-            onPressed: () {},
-            child: const Text('Reset variables')
-        ),
+            onPressed: counterState.resetScansLeft,
+            child: const Text('Reset Scans Left')),
         const Spacer(),
       ]),
     ));

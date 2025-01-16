@@ -31,7 +31,7 @@ class ScanState extends State<ScanProgress> {
   @override
   Widget build(BuildContext context) {
     final streakState = context.watch<StreakNotifier>();
-    final scanState = context.watch<CounterNotifier>();
+    final counterState = context.watch<CounterNotifier>();
 
     return Column(children: [
       Center(
@@ -39,7 +39,7 @@ class ScanState extends State<ScanProgress> {
           onPressed: () {
             streakState.updateStreak(currentDateTime: streakState.currentDay);
             streakState.updateProgressCirclesMap(currentDateTime: streakState.currentDay);
-            scanState.updateCounters();
+            counterState.updateCounters();
           },
           child: const Text("Simulate QR Scan"),
         ),

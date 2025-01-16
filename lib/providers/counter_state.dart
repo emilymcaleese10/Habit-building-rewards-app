@@ -12,7 +12,9 @@ class CounterNotifier with ChangeNotifier {
   }
 
   void decrementScansLeft() {
-    _scansLeft--;
+    if (_scansLeft > 0) {
+      _scansLeft--;
+    }
     notifyListeners();
   }
 
