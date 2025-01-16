@@ -10,8 +10,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ScanNotifier()),
-        ChangeNotifierProvider(create: (_) => StreakNotifier()),
+        ChangeNotifierProvider(create: (_) => CounterNotifier()),
+        ChangeNotifierProvider(create: (_) => StreakNotifier(lastScan: DateTime(2025, 1, 1))),
       ], 
     child: const HabitusApp(),
     )
