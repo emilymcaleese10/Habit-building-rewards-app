@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:habitus/main/constants.dart';
+// import 'package:habitus/main/constants.dart';
 import 'package:habitus/reusable_widgets/widgets.dart';
 import 'package:habitus/providers/providers.dart';
 
@@ -12,10 +12,7 @@ class ScanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
         appBar: AppBarWidget(),
-        drawer: Drawer(
-          backgroundColor: AppColours.appBarColour,
-          child: Text("hello"),
-        ),
+        drawer: HomeDrawer(),
         body: ScanProgress());
   }
 }

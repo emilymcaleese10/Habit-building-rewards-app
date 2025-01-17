@@ -22,17 +22,23 @@ class RewardListViewState extends State<RewardListView> {
           color: Colors.white,
           child: Center(
               child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 const Text(
                   'Reward expires in: 5 hrs 30 mins',
                   style: AppTextStyles.paragraphTextStyle,
                 ),
+                const Spacer(),
                 Text(
                   'Reward achieved: $dateRewarded',
                   style: AppTextStyles.paragraphTextStyle,
                 ),
+                const Spacer(),
+                const Text(
+                  'Show barcode at gym reception to receive reward',
+                  style: AppTextStyles.subtitleTextStyle,
+                )
               ],
             ),
           )),

@@ -12,10 +12,7 @@ class RewardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
         appBar: AppBarWidget(),
-        drawer: Drawer(
-          backgroundColor: AppColours.appBarColour,
-          child: Text("hello"),
-        ),
+        drawer: HomeDrawer(),
         body: GoalProgress());
   }
 }
