@@ -30,24 +30,44 @@ class RewardListViewState extends State<RewardListView> {
                     final reward = rewardState.rewardsList[index];
                     return Card(
                       child: ListTile(
-                        title: const Text(
-                          'Reward',
-                          style: AppTextStyles.paragraphTextStyle
-                        ),
+                        title: const Text('Reward',
+                            style: AppTextStyles.paragraphTextStyle),
                         subtitle: Text(
                           reward.dateRewarded, // string
                           style: AppTextStyles.subtitleTextStyle,
                         ),
+                        tileColor: AppColours.displayBoxBackgroundColour,
                         trailing: ElevatedButton(
-                          onPressed: () {
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green, // Background color
+                            foregroundColor: Colors.white, // Text color
+                          ),
+                          onPressed: reward.isRedeemed? null: () {
                             setState(() {
-                              reward.isRedeemed = !reward.isRedeemed;
+                              reward.isRedeemed = true;
                             });
-                          },
+                            } ,
                           child: Text(
                             reward.isRedeemed ? 'Ready' : 'Redeem',
                           ),
                         ),
+                        onTap: () {
+                          if (reward.isRedeemed) {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  height: 600,
+                                  color: Colors.white,
+                                  child: const Center(
+                                  child:
+                                      Text('This is a modal bottom sheet'),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        }
                       ),
                     );
                   },

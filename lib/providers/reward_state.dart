@@ -12,7 +12,7 @@ class RewardNotifier extends ChangeNotifier {
   }
 
   void addNewReward() {
-    rewardsList.add(Reward(dateRewarded: parseDate(DateTime.now())));
+    rewardsList.insert(0, Reward(dateRewarded: parseDate(DateTime.now()))); //adds object to beginning of list
     notifyListeners();
   }
 }
