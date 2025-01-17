@@ -8,4 +8,12 @@ class Reward {
     this.isRedeemed = false,
     this.isExpired = false,
   });
+
+  void redeemReward() {
+    isRedeemed = true;
+  }
+
+  void expireReward() {
+    isExpired = false;
+  }
 }

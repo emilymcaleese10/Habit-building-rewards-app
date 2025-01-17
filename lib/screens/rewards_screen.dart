@@ -69,6 +69,7 @@ class ProgressState extends State<GoalProgress> {
   @override
   Widget build(BuildContext context) {
     final counterState = context.watch<CounterNotifier>();
+    final rewardState = context.watch<RewardNotifier>();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -109,6 +110,11 @@ class ProgressState extends State<GoalProgress> {
                         RewardListView(),
                       ]
                     )
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: rewardState.addNewReward,
+                    child: const Text("Add Reward"),
                   ),
                   const Spacer(),
                 ]
