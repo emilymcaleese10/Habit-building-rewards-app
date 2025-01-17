@@ -39,7 +39,7 @@ class RewardListViewState extends State<RewardListView> {
                         tileColor: AppColours.displayBoxBackgroundColour,
                         trailing: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green, // Background color
+                            backgroundColor: AppColours.widgetGreen, // Background color
                             foregroundColor: Colors.white, // Text color
                           ),
                           onPressed: reward.isRedeemed? null: () {
@@ -59,9 +59,20 @@ class RewardListViewState extends State<RewardListView> {
                                 return Container(
                                   height: 600,
                                   color: Colors.white,
-                                  child: const Center(
-                                  child:
-                                      Text('This is a modal bottom sheet'),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(children: [
+                                        const Text(
+                                          'Reward expires in: 5 hrs 30 mins',
+                                          style: AppTextStyles.paragraphTextStyle,
+                                        ),
+                                        Text(
+                                          'Reward achieved: ${reward.dateRewarded}',
+                                          style: AppTextStyles.paragraphTextStyle,
+                                        ),
+                                      ],),
+                                    )
                                   ),
                                 );
                               },

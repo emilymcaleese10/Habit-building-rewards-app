@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habitus/reusable_widgets/widgets.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
 
 class RewardNotifier extends ChangeNotifier {
   final List<Reward> _rewardsList = [];
@@ -12,7 +13,19 @@ class RewardNotifier extends ChangeNotifier {
   }
 
   void addNewReward() {
-    rewardsList.insert(0, Reward(dateRewarded: parseDate(DateTime.now()))); //adds object to beginning of list
+    var newReward = Reward(dateRewarded: parseDate(DateTime.now()));
+    rewardsList.insert(0, newReward); //adds object to beginning of list
     notifyListeners();
   }
+
+  void redeemReward(int index) {
+    rewardsList[index].isRedeemed = true;
+
+    Timer(const Duration(seconds: 5), () {
+      rewardsList[index].isExpired = true; // expire when timer runs out
+    });
+
+    notifyListeners();
+  }
+
 }
