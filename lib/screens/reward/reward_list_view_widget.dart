@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:habitus/main/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:habitus/providers/providers.dart';
@@ -13,46 +14,62 @@ class RewardListView extends StatefulWidget {
 
 class RewardListViewState extends State<RewardListView> {
 
-  void showBottomSheet(BuildContext context, String dateRewarded) {
+  void startTimerForReward(Reward reward, Function updateBottomSheet) {
+    reward.startTimer(() {
+      updateBottomSheet();
+      setState(() {});
+    });
+  }
+
+  void showBottomSheet(BuildContext context, Reward reward) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 600,
-          color: Colors.white,
-          child: Center(
-              child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const Text(
-                  'Reward expires in: 5 hrs 30 mins',
-                  style: AppTextStyles.paragraphTextStyle,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+              height: 600,
+              color: Colors.white,
+              child: Center(
+                  child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      reward.isExpired
+                      ? 'Reward expired' 
+                      : 'Reward expires in: ${reward.remainingTime.inHours} hrs ${reward.remainingTime.inMinutes % 60} mins',
+                      style: AppTextStyles.paragraphTextStyle,
+                    ),
+                    const Spacer(),
+                    Text(
+                      'Reward achieved: ${reward.dateRewarded}',
+                      style: AppTextStyles.paragraphTextStyle,
+                    ),
+                    const Spacer(),
+                    const Text(
+                      'Show barcode at gym reception to receive reward',
+                      style: AppTextStyles.subtitleTextStyle,
+                    )
+                  ],
                 ),
-                const Spacer(),
-                Text(
-                  'Reward achieved: $dateRewarded',
-                  style: AppTextStyles.paragraphTextStyle,
-                ),
-                const Spacer(),
-                const Text(
-                  'Show barcode at gym reception to receive reward',
-                  style: AppTextStyles.subtitleTextStyle,
-                )
-              ],
-            ),
-          )),
+              )),
+            );
+          }
         );
       },
     );
   }
 
-  void _handleButtonPress(Reward reward) {
+
+
+  void _handleButtonPress(Reward reward, Function() updateBottomSheet) {
     if (reward.isRedeemed) {
-      showBottomSheet(context, reward.dateRewarded);
+      showBottomSheet(context, reward);
     } else {
       setState(() {
         reward.redeemReward();
+        startTimerForReward(reward, updateBottomSheet);
       });
     }
   }
@@ -83,14 +100,21 @@ class RewardListViewState extends State<RewardListView> {
                         tileColor: AppColours.displayBoxBackgroundColour,
                         trailing: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: reward.isRedeemed? const Color(0xFFC1E1C1) : AppColours.widgetGreen, // Background color
-                            foregroundColor: reward.isRedeemed? AppColours.mainFontColour : Colors.white, // Text color
+                            backgroundColor: reward.isRedeemed
+                                ? const Color(0xFFC1E1C1)
+                                : AppColours.widgetGreen, // Background color
+                            foregroundColor: reward.isRedeemed
+                                ? AppColours.mainFontColour
+                                : Colors.white, // Text color
                           ),
-                          onPressed: () {
-                            _handleButtonPress(reward);
+                          onPressed: reward.isExpired? null : () {
+                            _handleButtonPress(reward, () {
+                              setState(() {});
+                            });
                           },
                           child: Text(
-                            reward.isRedeemed ? 'View' : 'Redeem',
+                            reward.isExpired? 'Expired' :
+                            (reward.isRedeemed ? 'View' : 'Redeem'),
                           ),
                         ),
                       ),
