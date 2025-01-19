@@ -61,6 +61,47 @@ class RewardListViewState extends State<RewardListView> {
     );
   }
 
+  void _showRedeemDialog(BuildContext context, Reward reward, Function() updateBottomSheet) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Redeem Reward',
+          style: AppTextStyles.paragraphTextStyle,),
+          content: const Text(
+              'Are you sure you would like to redeem your reward now? Reward expires 24 hours after redeemed.',
+              style: AppTextStyles.noRewardsMessageTextStyle,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: AppColours.unselectedIconColour, 
+                foregroundColor: Colors.white,  
+              ),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+                setState(() {
+                  reward.redeemReward();
+                  startTimerForReward(reward, updateBottomSheet);
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColours.widgetGreen,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Redeem'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
 
   void _handleButtonPress(Reward reward, Function() updateBottomSheet) {
@@ -68,8 +109,7 @@ class RewardListViewState extends State<RewardListView> {
       showBottomSheet(context, reward);
     } else {
       setState(() {
-        reward.redeemReward();
-        startTimerForReward(reward, updateBottomSheet);
+        _showRedeemDialog(context, reward, updateBottomSheet);
       });
     }
   }
