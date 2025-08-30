@@ -46,6 +46,9 @@ class AppImages {
   static const String profileNavigationIcon =
       'assets/images/roundedProfileIcon.svg';
   static const String streakIcon = 'assets/images/streakIcon.svg';
+  static const String tickIcon = 'assets/images/greenTickIcon.svg';
+  static const String tickImage = 'assets/images/greenTickIcon.png';
+  static const String barbellIcon = 'assets/images/barbellLogoNoBackground.svg';
 }
 
 class AppDimensions {

@@ -6,7 +6,7 @@ import 'package:habitus/main/constants.dart';
 
 
 class SmallDisplaySquareWidget extends StatelessWidget {
-  final int displayNumber;
+  final String displayNumber;
   final String svgIcon;
 
   const SmallDisplaySquareWidget({
@@ -33,7 +33,7 @@ class SmallDisplaySquareWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Text(
-                "$displayNumber",
+                displayNumber,
                 style: AppTextStyles.paragraphTextStyle,
               ),
             ),

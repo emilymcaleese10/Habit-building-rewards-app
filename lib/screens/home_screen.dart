@@ -11,9 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        appBar: AppBarWidget(),
-        drawer: HomeDrawer(),
-        body: HomeDisplay());
+        appBar: AppBarWidget(), drawer: HomeDrawer(), body: HomeDisplay());
   }
 }
 
@@ -25,29 +23,75 @@ class HomeDisplay extends StatefulWidget {
 }
 
 class HomeState extends State<HomeDisplay> {
+  double get scanProgress {
+    final logState = context.watch<CounterNotifier>();
+    return (logState.goal - logState.scansLeft) / logState.goal;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final scanState = context.watch<CounterNotifier>();
+    final logState = context.watch<CounterNotifier>();
     final streakState = context.watch<StreakNotifier>();
 
     return Scaffold(
       body: Center(
         child: Column(children: <Widget>[
           const Spacer(),
-          const SizedBox(
-            width: 300,
-            child: Center(
-              child: Text(
-                "Streak:",
-                style: AppTextStyles.paragraphTextStyle,
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: 100,
+                child: Center(
+                  child: Text(
+                    "Progress",
+                    style: AppTextStyles.paragraphTextStyle,
+                  ),
+                ),
               ),
-            ),
+              SizedBox(
+                width: 100,
+                child: Center(
+                  child: Text(
+                    "Streak",
+                    style: AppTextStyles.paragraphTextStyle,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 100,
+                child: Center(
+                  child: Text(
+                    "Goal",
+                    style: AppTextStyles.paragraphTextStyle,
+                  ),
+                ),
+              ),
+            ],
           ),
           const Spacer(),
-          SmallDisplaySquareWidget(
-            displayNumber: streakState.streak, 
-            svgIcon: AppImages.streakIcon,
-        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SmallDisplaySquareWidget(
+                displayNumber: '${logState.currentLogs} / ${logState.goal}',
+                svgIcon: AppImages.tickIcon,
+              ),
+              SmallDisplaySquareWidget(
+                displayNumber: streakState.streak.toString(),
+                svgIcon: AppImages.streakIcon,
+              ),
+              SmallDisplaySquareWidget(
+                displayNumber: '${logState.goal}',
+                svgIcon: AppImages.barbellIcon,
+              ),
+            ],
+          ),
+          const Spacer(),
+          const Text("Reward Progress:",
+              style: AppTextStyles.paragraphTextStyle),
+          const Spacer(),
+          ProgressBarWidget(rewardProgress: scanProgress),
           const Spacer(),
           const SizedBox(
             width: 300,

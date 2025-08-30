@@ -19,8 +19,6 @@ class HomeDrawer extends StatelessWidget {
             Text("Privacy Policy", style: AppTextStyles.paragraphTextStyle),
             Text("Terms and Conditions",
                 style: AppTextStyles.paragraphTextStyle),
-            Text("Contact Habitus", style: AppTextStyles.paragraphTextStyle),
-            Text("Our Partners", style: AppTextStyles.paragraphTextStyle),
             Text("About", style: AppTextStyles.paragraphTextStyle),
             Text("Logout", style: AppTextStyles.paragraphTextStyle),
           ],

@@ -14,7 +14,7 @@ class RewardNotifier extends ChangeNotifier {
 
   void addNewReward() {
     var newReward = Reward(dateRewarded: parseDate(DateTime.now()));
-    rewardsList.insert(0, newReward); //adds object to beginning of list
+    rewardsList.insert(0, newReward); //adds object to beginning/top of list 
     notifyListeners();
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:habitus/screens/camera_screen.dart';
+import 'package:habitus/screens/map_screen.dart';
 import 'package:habitus/screens/home_screen.dart';
 import 'package:habitus/screens/rewards_screen.dart';
 
@@ -17,7 +17,7 @@ class MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const ScanScreen(),
+    const MapScreen(),
     const RewardsScreen(),
   ];
 
@@ -43,7 +43,7 @@ class MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppImages.qrCodeNavigationIcon,
                 height: 25, width: 25),
-            label: 'Scan',
+            label: 'Map',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppImages.giftNavigationIcon,

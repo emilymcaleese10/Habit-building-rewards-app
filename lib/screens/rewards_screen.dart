@@ -11,9 +11,7 @@ class RewardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        appBar: AppBarWidget(),
-        drawer: HomeDrawer(),
-        body: GoalProgress());
+        appBar: AppBarWidget(), drawer: HomeDrawer(), body: GoalProgress());
   }
 }
 
@@ -44,6 +42,7 @@ class ProgressState extends State<GoalProgress> {
 
   void updateRewardState() {
     final scanState = context.read<CounterNotifier>();
+    // final rewardState = context.watch<RewardNotifier>();
     setState(() {
       if (scanState.scansLeft > 0) {
         rewardCollected = false;
@@ -69,56 +68,49 @@ class ProgressState extends State<GoalProgress> {
     final rewardState = context.watch<RewardNotifier>();
 
     return Scaffold(
-      body: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              // minHeight: 600,
-              maxHeight: 600,
-            ),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  const Spacer(),
-                  const Text(
-                    "Scans left until next reward:",
-                    style: AppTextStyles.paragraphTextStyle
-                  ),
-                  const Spacer(),
-                  SmallDisplaySquareWidget(
-                    displayNumber: counterState.scansLeft,
-                    svgIcon: AppImages.qrCodeNavigationIcon
-                  ),
-                  const Spacer(),
-                  const Text("Reward Progress:", style: AppTextStyles.paragraphTextStyle),
-                  const Spacer(),
-                  ProgressBarWidget(rewardProgress: scanProgress),
-                  const Spacer(),
-                  const Text("Your Reward:", style: AppTextStyles.paragraphTextStyle),
-                  const Spacer(),
-                  const SizedBox(
+        body: SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          // minHeight: 600,
+          maxHeight: 600,
+        ),
+        child: Center(
+          child: Column(children: <Widget>[
+            const Spacer(),
+            const Text("Scans left until next reward:",
+                style: AppTextStyles.paragraphTextStyle),
+            const Spacer(),
+            SmallDisplaySquareWidget(
+                displayNumber: '${counterState.scansLeft}',
+                svgIcon: AppImages.qrCodeNavigationIcon),
+            const Spacer(),
+            const Text("Reward Progress:",
+                style: AppTextStyles.paragraphTextStyle),
+            const Spacer(),
+            ProgressBarWidget(rewardProgress: scanProgress),
+            const Spacer(),
+            const Text("Your Reward:", style: AppTextStyles.paragraphTextStyle),
+            const Spacer(),
+            const SizedBox(
+                width: 307,
+                height: 220,
+                child: Stack(children: [
+                  SizedBox(
                     width: 307,
                     height: 220,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: 307, height: 220,
-                          child: BackgroundBoxWidget(),
-                        ),
-                        RewardListView(),
-                      ]
-                    )
+                    child: BackgroundBoxWidget(),
                   ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: rewardState.addNewReward,
-                    child: const Text("Add Reward"),
-                  ),
-                  const Spacer(),
-                ]
-              ),
+                  RewardListView(),
+                ])),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: rewardState.addNewReward,
+              child: const Text("Add Reward"),
             ),
-          ),
-      )
-    );
+            const Spacer(),
+          ]),
+        ),
+      ),
+    ));
   }
 }

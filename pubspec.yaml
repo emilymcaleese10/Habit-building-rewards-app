@@ -36,6 +36,8 @@ dependencies:
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
   intl: ^0.18.0
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
 
 
 
@@ -57,14 +59,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/Primary Logo Simplified.svg
-    - assets/images/roundedProfileIcon.svg
-    - assets/images/giftIcon.svg
-    - assets/images/homeIcon.svg
-    - assets/images/qrCodeIcon.svg
-    - assets/images/streakIcon.svg
-
-    - assets/images/roundedProfileIcon.png
+    - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

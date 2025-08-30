@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:habitus/main/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:habitus/providers/providers.dart';
@@ -72,6 +71,7 @@ class RewardListViewState extends State<RewardListView> {
               'Are you sure you would like to redeem your reward now? Reward expires 24 hours after redeemed.',
               style: AppTextStyles.noRewardsMessageTextStyle,
           ),
+          backgroundColor: AppColours.displayBoxBackgroundColour,
           actions: [
             TextButton(
               onPressed: () {

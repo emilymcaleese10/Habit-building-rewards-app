@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 
 class CounterNotifier with ChangeNotifier {
-  int _scansLeft = 3;
-  int _totalScans = 0;
-  int get scansLeft => _scansLeft;
-  int get totalScans => _totalScans;
+  int _totalLogs = 0;
+  final int _goal = 3;
+  int _currentLogs = 0;
+
+  int get totalLogs => _totalLogs;
+  int get goal => _goal;
+  int get currentLogs => _currentLogs;
 
   void updateCounters() {
-    decrementScansLeft();
     incrementTotalScans();
+    incrementCurrentLogs();
   }
 
-  void decrementScansLeft() {
-    if (_scansLeft > 0) {
-      _scansLeft--;
+  void incrementCurrentLogs () {
+    if (_currentLogs < _goal) {
+      _currentLogs++;
     }
     notifyListeners();
   }
 
-  void resetScansLeft() {
-    _scansLeft = 3;
+  void resetCurrentLogs() {
+    _currentLogs = 0;
     notifyListeners();
   }
 
   void incrementTotalScans() {
-    _totalScans++;
+    _totalLogs++;
     notifyListeners();
   }
+  
+  // code for reward screen
+  int get scansLeft => _goal - _currentLogs;
 }
